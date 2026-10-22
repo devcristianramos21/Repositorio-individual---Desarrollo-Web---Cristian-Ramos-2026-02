@@ -56,3 +56,4 @@ export const productosIniciales: Producto[] = [
   },
 ];
 
+// producto
