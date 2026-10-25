@@ -1,5 +1,5 @@
 import { Header } from './components/Header';
-
+import Footer from './components/Footer';
 
 const NOMBRE_SITIO = 'Café Andino';
 const ANIO_ACTUAL = new Date().getFullYear(); // se calcula una vez, fuera del componente
@@ -21,7 +21,8 @@ function App() {
           { texto: 'Contacto', href: '#contacto' },
         ]}
       />
-    
+
+      <Footer nombreSitio={NOMBRE_SITIO} anio={ANIO_ACTUAL} />
     </>
   );
 }
