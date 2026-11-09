@@ -1,28 +1,27 @@
 // Capa de controladores, que se encarga de recibir las solicitudes HTTP y enviar las respuestas correspondientes
+// Express 5: si una función async lanza un error, se envía solo al middleware de errores de app.js
 
 const servicioTareas = require("../services/tareas.service");
 
-function listarTareas(req, res) {
-    res.status(200).json(servicioTareas.listarTareas());
-}
-function obtenerTarea(req, res) {
-    const id = Number(req.params.id);
-    res.status(200).json(servicioTareas.obtenerTareas(id));
+async function listarTareas(req, res) {
+    res.status(200).json(await servicioTareas.listarTareas());
 }
 
-function crearTarea(req, res) {
-    const nueva=servicioTareas.crearTarea(req.body.titulo);
+async function obtenerTarea(req, res) {
+    res.status(200).json(await servicioTareas.obtenerTarea(req.params.id));
+}
+
+async function crearTarea(req, res) {
+    const nueva = await servicioTareas.crearTarea(req.body?.titulo);
     res.status(201).json(nueva);
 }
 
-function actualizarTarea(req, res) {
-    const id = Number(req.params.id);
-    res.status(200).json(servicioTareas.actualizarTarea(id, req.body));
-
+async function actualizarTarea(req, res) {
+    res.status(200).json(await servicioTareas.actualizarTarea(req.params.id, req.body));
 }
 
-function eliminarTarea(req, res) {
-    servicioTareas.eliminarTarea(Number(req.params.id));
+async function eliminarTarea(req, res) {
+    await servicioTareas.eliminarTarea(req.params.id);
     res.status(204).send();
 }
 
