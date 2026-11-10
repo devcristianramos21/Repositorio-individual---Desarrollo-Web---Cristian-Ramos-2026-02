@@ -1,6 +1,8 @@
 // Configuracion de express, app.use le de una orden para cada peticion
 
 const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const openapi = require("./docs/openapi");
 const tareasRoutes = require("./routes/tareas.routes");
 const HttpError = require("./utils/HttpError");
 const app = express();
@@ -15,6 +17,10 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api", tareasRoutes);
+
+// Documentación interactiva: Swagger UI convierte el objeto de docs/openapi.js en una página web
+// (debe ir ANTES del 404, o esa ruta la atraparía primero)
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapi));
 
 // 3. Ruta no encontrada: ninguna ruta anterior respondió
 app.use((req, res) => {

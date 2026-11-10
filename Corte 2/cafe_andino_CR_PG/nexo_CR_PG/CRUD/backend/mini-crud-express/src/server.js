@@ -9,6 +9,7 @@ async function iniciar() {
         await conectarDB(process.env.MONGODB_URI);
         app.listen(PORT, () => {
             console.log(`API tareas en http://localhost:${PORT}/api/tareas`);
+            console.log(`Documentación (Swagger UI) en http://localhost:${PORT}/api-docs`);
         });
     } catch (error) {
         console.error("No se pudo conectar a MongoDB:", error.message);
